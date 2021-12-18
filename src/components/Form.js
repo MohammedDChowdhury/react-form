@@ -3,9 +3,11 @@ const initialState = {
   name: "",
   email: "",
   password: "",
+  dob: "",
   nameError: "",
   emailError: "",
   passwordError: "",
+  dobError: "",
 };
 export default class MyForm extends React.Component {
   state = initialState;
@@ -23,12 +25,15 @@ export default class MyForm extends React.Component {
     this.setState({ rememberMe: event.target.checked });
   };
 
+  // validate if user is over 18
+
   validate = () => {
     let nameError = "";
     let emailError = "";
     let passwordError = "";
+    let dobError = "";
     if (!this.state.name) {
-      nameError = "name cannot be blank";
+      nameError = "Name cannot be blank";
     }
     if (nameError) {
       this.setState({ nameError });
@@ -41,8 +46,15 @@ export default class MyForm extends React.Component {
     if (!this.state.password) {
       passwordError = "Password cannot be blank";
     }
-    if (nameError || emailError || passwordError) {
-      this.setState({ nameError, emailError, passwordError }); // setting the state to that string variable
+    if (!this.state.dob) {
+      dobError = "Date of birth cannot be blank";
+    }
+
+    // if (!this.state.dob.isValidDate(this.state.dob)) {
+    //   dobError = "Enter your date of birth";
+    // }
+    if (nameError || emailError || passwordError || dobError) {
+      this.setState({ nameError, emailError, passwordError, dobError }); // setting the state to that string variable
       return false; // setting validation to false
     }
 
@@ -95,8 +107,12 @@ export default class MyForm extends React.Component {
             {this.state.passwordError}
           </div>
         </div>
+        <div>
+          <input type="date" id="datemin" name="datemin" max="2003-01-01" />
+        </div>
+        <div style={{ fontSize: 12, color: "red" }}>{this.state.dobError} </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Register</button>
       </form>
     );
   }
