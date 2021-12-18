@@ -25,8 +25,6 @@ export default class MyForm extends React.Component {
     this.setState({ rememberMe: event.target.checked });
   };
 
-  // validate if user is over 18
-
   validate = () => {
     let nameError = "";
     let emailError = "";
@@ -50,9 +48,6 @@ export default class MyForm extends React.Component {
       dobError = "Date of birth cannot be blank";
     }
 
-    // if (!this.state.dob.isValidDate(this.state.dob)) {
-    //   dobError = "Enter your date of birth";
-    // }
     if (nameError || emailError || passwordError || dobError) {
       this.setState({ nameError, emailError, passwordError, dobError }); // setting the state to that string variable
       return false; // setting validation to false
